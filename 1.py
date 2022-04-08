@@ -47,7 +47,7 @@ test_list = Basic_file_processing('202101_test.csv')
 # 设定k值
 k = 3
 # 设定精度（具体值）
-accuracy = 0.9
+accuracy = 0.09
 # 设定精度（误差占比：误差÷真实值）
 error_percentage = 5 / 1000
 # 测试计数
@@ -81,15 +81,15 @@ for x in test_list:
             # 将 二维数组 变回列表
             calculated_value_array = calculated_value_array.tolist()
         # print(Euclidean_distance)
-    # if abs(x_converted[0] - calculated_value_array[0][0]) < accuracy:
-    if abs(x_converted[0] - calculated_value_array[0][0])/x_converted[0] < error_percentage:
+    if abs(x_converted[0] - calculated_value_array[0][0]) < accuracy:
+    # if abs(x_converted[0] - calculated_value_array[0][0])/x_converted[0] < error_percentage:
         correct += 1
         print('实际值：', x_converted[0], '预测值：', calculated_value_array[0][0])
         print('预测正确')
     else:
         print('实际值：', x_converted[0], '预测值：', calculated_value_array[0][0])
         print('Prediction Error')
+    print(calculated_value_array)
 
 prediction_accuracy = correct / len(test_list) * 100
 print('\n正确率：', prediction_accuracy, '%')
-# print(calculated_value_array)
