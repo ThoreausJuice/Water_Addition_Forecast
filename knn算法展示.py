@@ -3,41 +3,7 @@
 # 加水预测试作
 
 import numpy as np
-
-# 函数功能：对文件进行基本处理，形成以回车为分隔符的数组
-def Basic_file_processing(file_name):
-    # 加载训练集
-    with open(file_name, 'r', encoding = 'utf-8') as b:
-        b_original_string = b.read()
-
-    b_first_processing = b_original_string.split('\n')
-    
-    # 处理掉文件结尾的空值
-    if b_first_processing[-1] == '':
-        b_first_processing.pop()
-    
-    return b_first_processing
-
-# 函数功能：对单行数据进行数组转化，方便后续计算
-def convert(one_line):
-    one_line_list = one_line.split(',')
-    converted_group = [] # 初始化 已转化组
-    for i in range(16):
-        if i > 2 and one_line_list[i] != '':
-            converted_group.append(float(one_line_list[i]))  # 将 实际值 + 待测组 暂存至 已转化组
-
-    return np.array(converted_group)
-
-# # 加载类别标签
-# with open('202101_category.csv', encoding='utf-8') as a:
-#     a_original_string = a.read()
-
-# a_first_processing = a_original_string.split(',')
-# i = 0
-# for ele in a_first_processing:
-#     # print(i,ele)
-#     i+=1
-
+from Data_Processing_Function import *
 
 # 正文如下：
 # 数据读入及预处理
@@ -47,7 +13,7 @@ test_list = Basic_file_processing('202101_test.csv')
 # 设定k值
 k = 3
 # 设定精度（具体值）
-accuracy = 0.09
+accuracy = 0.9
 # 设定精度（误差占比：误差÷真实值）
 error_percentage = 5 / 1000
 # 测试计数
@@ -56,6 +22,7 @@ correct = 0
 # 测试开始
 for x in test_list:
     x_converted = convert(x)
+    # print(x_converted)
     # 初始化 计算值 数组，该者为多对数组组成的二维数组
     calculated_value_array = []
     for y in training_list:
@@ -81,14 +48,17 @@ for x in test_list:
             # 将 二维数组 变回列表
             calculated_value_array = calculated_value_array.tolist()
         # print(Euclidean_distance)
-    if abs(x_converted[0] - calculated_value_array[0][0]) < accuracy:
-    # if abs(x_converted[0] - calculated_value_array[0][0])/x_converted[0] < error_percentage:
+    # 误差δ
+    δ = abs(x_converted[0] - calculated_value_array[0][0])
+    if δ < accuracy:
+    # if δ/x_converted[0] < error_percentage:
         correct += 1
         print('实际值：', x_converted[0], '预测值：', calculated_value_array[0][0])
         print('预测正确')
     else:
         print('实际值：', x_converted[0], '预测值：', calculated_value_array[0][0])
         print('Prediction Error')
+    print(δ)
     print(calculated_value_array)
 
 prediction_accuracy = correct / len(test_list) * 100
