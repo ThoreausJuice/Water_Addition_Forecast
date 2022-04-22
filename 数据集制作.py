@@ -2,9 +2,13 @@
 
 # 加水预测，训练集（202101_training.csv）,测试集制作（202101_test.csv）,类别标签集制作（202101_category.csv）
 
+from fileinput import filename
 from math import floor
 
-with open('202101.csv', 'r', encoding='utf-8') as f:
+# filename_1 = '202101.csv'
+filename_2 = '2021_all_year_done.csv'
+
+with open(filename_2, 'r', encoding='utf-8') as f:
     original_string = f.read()
 
 # 预处理 + 去除文件结尾的空值
@@ -20,10 +24,10 @@ volume_of_test_set = floor(amount_of_data * 0.2)
 interval = floor(amount_of_data / volume_of_test_set)
 
 # 划分三个集合文件，注意从1开始，避开数据抬头
-with open('202101_test.csv', 'w', encoding='utf-8') as a:
-    with open('202101_training.csv', 'w', encoding='utf-8') as b:
-        with open('202101_category.csv', 'w', encoding = 'utf-8') as c:
-            for i in range(0,306):
+with open('test.csv', 'w', encoding='utf-8') as a:
+    with open('training.csv', 'w', encoding='utf-8') as b:
+        with open('category.csv', 'w', encoding = 'utf-8') as c:
+            for i in range(0,amount_of_data):
                 if i == 0:
                     c.write(first_processing[i])
                 elif i % 5 == 0 and i != 0:

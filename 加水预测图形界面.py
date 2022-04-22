@@ -91,7 +91,7 @@ note.pack()
 
 # 以下开始是 历史数据 的选项卡部分
 # 加载类别标签
-with open('202101_category.csv', encoding='utf-8') as a:
+with open('category.csv', encoding='utf-8') as a:
     a_original_string = a.read()
 
 a_first_processing = a_original_string.split(',')
@@ -123,7 +123,7 @@ for ele in columns:
     table.heading(column=ele, text=ele)
     table.column(ele, anchor=S)
 
-training_list = Basic_file_processing('202101_training.csv')
+training_list = Basic_file_processing('training.csv')
 
 for x in training_list:
     first_processing = x.split(',')
@@ -186,7 +186,7 @@ for ele in columns[12:]:
 
 # 预测功能实现
 # 数据读入及预处理
-training_list = Basic_file_processing('202101_training.csv')
+training_list = Basic_file_processing('training.csv')
 # 设定k值
 k = 3
 # 打印值字体设定

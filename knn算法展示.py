@@ -7,8 +7,8 @@ from Data_Processing_Function import *
 
 # 正文如下：
 # 数据读入及预处理
-training_list = Basic_file_processing('202101_training.csv')
-test_list = Basic_file_processing('202101_test.csv')
+training_list = Basic_file_processing('training.csv')
+test_list = Basic_file_processing('test.csv')
 
 # 设定k值
 k = 3
@@ -18,6 +18,9 @@ accuracy = 0.9
 error_percentage = 5 / 1000
 # 测试计数
 correct = 0
+# 用于在对照数据集 和 测试集 都很大的情况下，实时显示正确率和进度用：
+# 当前总数：
+current_total = 0
 
 # 测试开始
 for x in test_list:
@@ -61,5 +64,10 @@ for x in test_list:
     print(δ)
     print(calculated_value_array)
 
+    current_total += 1
+
+    print('当前正确率：', correct / current_total * 100, '%', '正确个数：', correct, '已跑数据量：', current_total, '/',len(test_list))
+
+# print(correct, len(test_list))
 prediction_accuracy = correct / len(test_list) * 100
-print('\n正确率：', prediction_accuracy, '%')
+print('\n总正确率：', prediction_accuracy, '%')
