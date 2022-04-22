@@ -3,8 +3,6 @@
 # 加水预测，训练集（202101_training.csv）,测试集制作（202101_test.csv）,类别标签集制作（202101_category.csv）
 
 from math import floor
-from re import A
-
 
 with open('202101.csv', 'r', encoding='utf-8') as f:
     original_string = f.read()
