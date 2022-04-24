@@ -66,8 +66,8 @@ for x in test_list:
 
     current_total += 1
 
-    print('当前正确率：', correct / current_total * 100, '%', '正确个数：', correct, '已跑数据量：', current_total, '/',len(test_list))
+    print('当前正确率：', correct / current_total * 100, '%', '正确个数：', correct, '已跑数据量：', current_total, '/', len(test_list), '进度：', current_total / len(test_list) * 100, '%')
 
 # print(correct, len(test_list))
 prediction_accuracy = correct / len(test_list) * 100
-print('\n总正确率：', prediction_accuracy, '%')
+print('\n总正确率: ', prediction_accuracy, '%')
